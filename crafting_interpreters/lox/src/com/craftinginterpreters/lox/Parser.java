@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package com.craftinginterpreters.lox;
 
 import java.util.List;
@@ -122,4 +123,7 @@ public class Parser {
     private Token previous() {
         return tokens.get(current - 1);
     }
+=======
+package com.craftinginterpreters.lox;public class Parser {
+>>>>>>> e4b5f67033e491e3cc020373554a29d0c0c66d94
 }
