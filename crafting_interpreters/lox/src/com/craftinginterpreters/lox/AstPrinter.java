@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package com.craftinginterpreters.lox;
 
 class AstPrinter implements Expr.Visitor<String> {
@@ -41,7 +40,4 @@ class AstPrinter implements Expr.Visitor<String> {
         return builder.toString();
     }
 }
-=======
-package com.craftinginterpreters.lox;public class AstPrinter {
-}
->>>>>>> e4b5f67033e491e3cc020373554a29d0c0c66d94
+

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package com.craftinginterpreters.lox;
 
 import java.util.ArrayList;
@@ -201,10 +200,4 @@ public class Scanner {
         String value = source.substring(start +1, current -1);
         addToken(STRING, value);
     }
-=======
-import java.util.ArrayList;
-
-
-public class Scanner {
->>>>>>> e4b5f67033e491e3cc020373554a29d0c0c66d94
 }

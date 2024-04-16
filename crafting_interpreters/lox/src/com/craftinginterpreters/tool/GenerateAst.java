@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package com.craftinginterpreters.tool;
 
 import java.io.IOException;
@@ -18,6 +17,10 @@ public class GenerateAst {
                 "Grouping : Expr expression",
                 "Literal  : Object value",
                 "Unary    : Token operator, Expr right"
+        ));
+        defineAst(outputDir, "Stmt", Arrays.asList(
+                "Expression : Expr expression",
+                "Print      : Expr expression"
         ));
     }
 
@@ -96,7 +99,5 @@ public class GenerateAst {
 
         writer.println("  }");
     }
-=======
-package com.craftinginterpreters.tool;public class GenerateAst {
->>>>>>> e4b5f67033e491e3cc020373554a29d0c0c66d94
+
 }

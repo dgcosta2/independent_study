@@ -1,8 +1,5 @@
-<<<<<<< HEAD
 package com.craftinginterpreters.lox;
 
-=======
->>>>>>> e4b5f67033e491e3cc020373554a29d0c0c66d94
 public class Token {
     final TokenType type;
     final String lexeme;
