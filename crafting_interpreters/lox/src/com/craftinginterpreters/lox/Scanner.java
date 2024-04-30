@@ -90,9 +90,12 @@ public class Scanner {
                  * like this one!
                  */
                 else if (match('*')) {
-                    while (peek() != '*' && peekNext() != '/' && !isAtEnd()) {
+                    while (!(peek() == '*' && peekNext() == '/') && !isAtEnd()) {
                         if (peek() == '\n') line ++;
                         advance();
+                    }
+                    if (peek() == '*' && peekNext() == '/') {
+                        advance(); advance();
                     }
                 }
                 else {
@@ -106,6 +109,7 @@ public class Scanner {
             case '\n':
                 line++;
                 break;
+            case '"': string(); break;
             default:
                 if (isDigit(c)) {
                     number();

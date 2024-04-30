@@ -2,6 +2,7 @@ package com.craftinginterpreters.lox;
 
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
@@ -11,6 +12,7 @@ import java.util.List;
 
 public class Lox {
     private static final Interpreter interpreter = new Interpreter();
+    private static final Tester tester = new Tester();
     static boolean hadError = false;
     static boolean hadRuntimeError = false;
 
@@ -19,7 +21,11 @@ public class Lox {
             System.out.println("Usage: jlox [script]");
             System.exit(64);
         } else if (args.length == 1) {
-            runFile(args[0]);
+            if (args[0].equals("test")) {
+                runTest();
+            } else {
+                runFile(args[0]);
+            }
         } else {
             runPrompt();
         }
@@ -31,12 +37,24 @@ public class Lox {
         hadRuntimeError = true;
     }
 
-    private static void runFile(String path) throws IOException {
+    public static void runFile(String path) throws IOException {
         byte[] bytes = Files.readAllBytes(Paths.get(path));
         run(new String(bytes, Charset.defaultCharset()));
 
         if (hadError) System.exit(65);
         if (hadRuntimeError) System.exit(70);
+    }
+
+    private static void runTest() throws IOException, NullPointerException {
+        File folder = new File("../test/");
+        try {
+            for (File test : folder.listFiles()) {
+                Tester.test(test.getPath());
+            }
+            System.out.println("Everything OK");
+        } catch (TesterException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     private static void runPrompt() throws IOException {
@@ -56,12 +74,12 @@ public class Lox {
         Scanner scanner = new Scanner(source);
         List<Token> tokens = scanner.scanTokens();
         Parser parser = new Parser(tokens);
-        Expr expression = parser.parse();
+        List<Stmt> statements = parser.parse();
 
         // Stop if there was a syntax error.
         if (hadError) return;
 
-        interpreter.interpret(expression);
+        interpreter.interpret(statements);
     }
 
     static void error(int line, String message) {
