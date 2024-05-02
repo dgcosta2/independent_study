@@ -19,12 +19,20 @@ public class Tester {
         Scanner fileIn = new Scanner(fp);
         System.setOut(newOutput);
 
-        String value = goldenFileScanner.nextLine().strip();
+        StringBuilder valueBuilder = new StringBuilder();
+        while (goldenFileScanner.hasNext()) {
+            valueBuilder.append(goldenFileScanner.nextLine());
+        }
+        String value = valueBuilder.toString();
 
         Lox.runFile(path);
 
         System.setOut(sysOut);
-        String actualOutput = fileIn.nextLine();
+        StringBuilder actualOutputBuilder = new StringBuilder();
+        while (fileIn.hasNext()) {
+            actualOutputBuilder.append(fileIn.nextLine());
+        }
+        String actualOutput = actualOutputBuilder.toString();
         if (!value.equals(actualOutput)) {
             throw new TesterException("File " + path + "\tNOT OK");
         }
